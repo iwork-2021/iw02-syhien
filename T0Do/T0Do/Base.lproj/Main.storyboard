@@ -17,11 +17,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="T0DoCell" id="k6q-Hb-6tR" customClass="T0DoTableViewCell" customModule="T0Do" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="T0DoCell" id="k6q-Hb-6tR" customClass="T0DoTableViewCell" customModule="T0Do" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="k6q-Hb-6tR" id="gdF-SM-ogl">
-                                    <rect key="frame" x="0.0" y="0.0" width="373.5" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="384.5" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gdt-L7-kUz">
@@ -47,6 +47,7 @@
                                 <connections>
                                     <outlet property="job" destination="pK2-IO-aDJ" id="TKv-hk-gBK"/>
                                     <outlet property="status" destination="gdt-L7-kUz" id="cP4-F6-ZGw"/>
+                                    <segue destination="bXw-Mv-2yW" kind="presentation" identifier="editJob" id="uI5-7b-PCk"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -143,6 +144,7 @@
                             <constraint firstItem="yKR-uv-fU4" firstAttribute="top" secondItem="SwA-9H-8Ts" secondAttribute="bottom" constant="20" id="rxE-Bu-jcX"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="JOq-DM-mPl"/>
                     <connections>
                         <outlet property="SaveButton" destination="bog-PU-Uop" id="fXe-QS-US4"/>
                         <outlet property="finishSwitch" destination="Yrq-ju-dUR" id="mTE-H5-MUV"/>
@@ -173,6 +175,9 @@
             <point key="canvasLocation" x="-278.26086956521743" y="20.758928571428569"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="p09-8g-5Nc"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

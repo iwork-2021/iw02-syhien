@@ -95,13 +95,49 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SwA-9H-8Ts" userLabel="titleStack">
+                                <rect key="frame" x="20.5" y="76" width="373" height="34"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="想要做： " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Coj-MQ-wOD">
+                                        <rect key="frame" x="0.0" y="0.0" width="74" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zQe-ML-CdA">
+                                        <rect key="frame" x="74" y="0.0" width="299" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yKR-uv-fU4" userLabel="finishStack">
+                                <rect key="frame" x="20.5" y="130" width="373" height="31"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="是否已经达成： " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OM0-WC-XXo">
+                                        <rect key="frame" x="0.0" y="0.0" width="324" height="31"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yrq-ju-dUR">
+                                        <rect key="frame" x="324" y="0.0" width="51" height="31"/>
+                                    </switch>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="yUt-bR-XNt"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="pCq-Vm-YQE" firstAttribute="width" secondItem="yUt-bR-XNt" secondAttribute="width" id="3f0-EM-1PW"/>
+                            <constraint firstItem="yKR-uv-fU4" firstAttribute="width" secondItem="t6z-VC-a6P" secondAttribute="width" multiplier="0.9" id="7jv-ES-kVu"/>
                             <constraint firstItem="pCq-Vm-YQE" firstAttribute="centerX" secondItem="yUt-bR-XNt" secondAttribute="centerX" id="8fR-hg-nUO"/>
+                            <constraint firstItem="SwA-9H-8Ts" firstAttribute="width" secondItem="t6z-VC-a6P" secondAttribute="width" multiplier="0.9" id="Ay9-su-eya"/>
                             <constraint firstItem="pCq-Vm-YQE" firstAttribute="top" secondItem="yUt-bR-XNt" secondAttribute="top" id="Ngh-Ax-TwA"/>
+                            <constraint firstItem="SwA-9H-8Ts" firstAttribute="top" secondItem="pCq-Vm-YQE" secondAttribute="bottom" constant="20" id="ikf-Gr-wjV"/>
+                            <constraint firstItem="SwA-9H-8Ts" firstAttribute="centerX" secondItem="yUt-bR-XNt" secondAttribute="centerX" id="kP6-X3-dLg"/>
+                            <constraint firstItem="yKR-uv-fU4" firstAttribute="centerX" secondItem="yUt-bR-XNt" secondAttribute="centerX" id="ork-07-Fa9"/>
+                            <constraint firstItem="yKR-uv-fU4" firstAttribute="top" secondItem="SwA-9H-8Ts" secondAttribute="bottom" constant="20" id="rxE-Bu-jcX"/>
                         </constraints>
                     </view>
                 </viewController>

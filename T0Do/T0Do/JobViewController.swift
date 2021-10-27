@@ -21,6 +21,7 @@ class JobViewController: UIViewController {
     
     @IBAction func SaveTouched(_ sender: UIBarButtonItem) {
         self.performSegue(withIdentifier: "backToT0Do", sender: nil)
+//        self.dismiss(animated: true, completion: nil)
     }
     /*
     // MARK: - Navigation

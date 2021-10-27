@@ -58,7 +58,7 @@
                     <navigationItem key="navigationItem" title="Tier 0 to Do" id="hRu-fj-Vtz">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="63B-9P-645">
                             <connections>
-                                <segue destination="bXw-Mv-2yW" kind="popoverPresentation" popoverAnchorBarButtonItem="63B-9P-645" id="p09-8g-5Nc">
+                                <segue destination="bXw-Mv-2yW" kind="popoverPresentation" identifier="addJob" popoverAnchorBarButtonItem="63B-9P-645" id="p09-8g-5Nc">
                                     <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                 </segue>
                             </connections>
@@ -145,6 +145,8 @@
                     </view>
                     <connections>
                         <outlet property="SaveButton" destination="bog-PU-Uop" id="fXe-QS-US4"/>
+                        <outlet property="finishSwitch" destination="Yrq-ju-dUR" id="mTE-H5-MUV"/>
+                        <outlet property="titleInput" destination="zQe-ML-CdA" id="GKO-Qq-5GR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sqg-Nq-aDU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -7,7 +7,12 @@
 
 import UIKit
 
-class T0DoTableViewController: UITableViewController {
+class T0DoTableViewController: UITableViewController, AddJobDelegate {
+    func addJob(job: JobToDo) {
+        self.jobs.append(job)
+        self.tableView.reloadData()
+    }
+    
 
     
     var jobs:[JobToDo] = [
@@ -72,14 +77,18 @@ class T0DoTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "addJob" {
+            let addJobViewController = segue.destination as! JobViewController
+            addJobViewController.addJobDelegate = self
+        }
     }
-    */
+    
 
 }

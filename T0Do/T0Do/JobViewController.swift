@@ -7,9 +7,17 @@
 
 import UIKit
 
+protocol AddJobDelegate {
+    func addJob(job: JobToDo)
+}
+
 class JobViewController: UIViewController {
 
+    @IBOutlet weak var finishSwitch: UISwitch!
+    @IBOutlet weak var titleInput: UITextField!
     @IBOutlet weak var SaveButton: UIBarButtonItem!
+    var addJobDelegate: AddJobDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,18 +30,10 @@ class JobViewController: UIViewController {
     }
     
     @IBAction func SaveTouched(_ sender: UIBarButtonItem) {
+        self.addJobDelegate?.addJob(job: JobToDo(title: titleInput.text!, isFinished: finishSwitch.isOn))
         self.performSegue(withIdentifier: "backToT0Do", sender: nil)
 //        self.dismiss(animated: true, completion: nil)
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 

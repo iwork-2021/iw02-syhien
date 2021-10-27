@@ -9,10 +9,12 @@ import UIKit
 
 class JobViewController: UIViewController {
 
+    @IBOutlet weak var SaveButton: UIBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        SaveButton.isEnabled = false
     }
     
     @IBAction func CancelTouched(_ sender: UIBarButtonItem) {
@@ -33,4 +35,14 @@ class JobViewController: UIViewController {
     }
     */
 
+}
+
+extension JobViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let oldText = textField.text!
+        let stringRange = Range(range, in: oldText)!
+        let newText = oldText.replacingCharacters(in: stringRange, with: string)
+        SaveButton.isEnabled = !newText.isEmpty
+        return true
+    }
 }

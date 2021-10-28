@@ -85,6 +85,16 @@ class T0DoTableViewController: UITableViewController, AddJobDelegate, EditJobDel
         jobs.remove(at: indexPath.row)
         self.tableView.deleteRows(at: [indexPath], with: .automatic)
     }
+    
+    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let unfinishAction = UIContextualAction(style: .normal, title: "(un)finish it") { (action, view, completionHandler) in
+            self.jobs[indexPath.row].isFinished = !self.jobs[indexPath.row].isFinished
+            completionHandler(true)
+            self.tableView.reloadData()
+        }
+        unfinishAction.backgroundColor = .orange
+        return UISwipeActionsConfiguration(actions: [unfinishAction])
+    }
 
     @IBAction func unwindToT0Do(segue: UIStoryboardSegue) {
         print("Back to T0Do")

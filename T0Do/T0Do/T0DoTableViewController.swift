@@ -48,6 +48,13 @@ class T0DoTableViewController: UITableViewController, AddJobDelegate, EditJobDel
         JobToDo(title: "movie script", isFinished: false)
     ]
     
+    @IBAction func refreshTouched(_ sender: Any) {
+        jobs.sort { (joba, jobb) -> Bool in
+            return joba.isFinished == false
+        }
+        self.tableView.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.prefersLargeTitles = true
@@ -77,6 +84,7 @@ class T0DoTableViewController: UITableViewController, AddJobDelegate, EditJobDel
         let job = jobs[indexPath.row]
         cell.status.text! = job.isFinished ? "✅" : "🥱"
         cell.job.text! = job.title
+        cell.backgroundColor = job.isFinished ? .systemGray6 : .none
         return cell
     }
 

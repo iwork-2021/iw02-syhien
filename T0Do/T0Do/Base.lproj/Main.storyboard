@@ -57,6 +57,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Tier 0 to Do" id="hRu-fj-Vtz">
+                        <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="9QG-aX-wLh">
+                            <connections>
+                                <action selector="refreshTouched:" destination="Cd3-8X-AKz" id="RPS-E1-I52"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="63B-9P-645">
                             <connections>
                                 <segue destination="bXw-Mv-2yW" kind="popoverPresentation" identifier="addJob" popoverAnchorBarButtonItem="63B-9P-645" id="p09-8g-5Nc">

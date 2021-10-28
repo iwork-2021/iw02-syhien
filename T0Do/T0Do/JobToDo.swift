@@ -7,7 +7,7 @@
 
 import UIKit
 
-class JobToDo: NSObject {
+class JobToDo: NSObject, Encodable, Decodable {
     
     var title: String
     var isFinished: Bool

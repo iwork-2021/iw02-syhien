@@ -18,7 +18,29 @@ class T0DoTableViewController: UITableViewController, AddJobDelegate, EditJobDel
         self.tableView.reloadData()
     }
     
-
+    func dataFilePath() -> URL {
+        let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+        return path!.appendingPathComponent("T0DoJobs.json")
+    }
+    
+    func saveAll() {
+        do {
+            let data = try JSONEncoder().encode(jobs)
+            try data.write(to: dataFilePath(), options: .atomic)
+        } catch {
+            print("Unable to save: \(error.localizedDescription)")
+        }
+    }
+    
+    func loadAll() {
+        if let data = try? Data(contentsOf: dataFilePath()) {
+            do {
+                jobs = try JSONDecoder().decode([JobToDo].self, from: data)
+            } catch {
+                print("Error loading from: \(error.localizedDescription)")
+            }
+        }
+    }
     
     var jobs:[JobToDo] = [
         JobToDo(title: "Eat lunch", isFinished: false),
@@ -29,6 +51,7 @@ class T0DoTableViewController: UITableViewController, AddJobDelegate, EditJobDel
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.loadAll()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false

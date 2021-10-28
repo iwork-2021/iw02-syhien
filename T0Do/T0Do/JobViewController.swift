@@ -11,18 +11,30 @@ protocol AddJobDelegate {
     func addJob(job: JobToDo)
 }
 
+protocol EditJobDelegate {
+    func editJob(job: JobToDo, jobIndex: Int)
+}
+
 class JobViewController: UIViewController {
 
     @IBOutlet weak var finishSwitch: UISwitch!
     @IBOutlet weak var titleInput: UITextField!
     @IBOutlet weak var SaveButton: UIBarButtonItem!
     var addJobDelegate: AddJobDelegate?
+    var editJobDelegate: EditJobDelegate?
+    var jobToEdit: JobToDo?
+    var jobToEditIndex: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         SaveButton.isEnabled = false
+        if jobToEdit != nil {
+            titleInput.text! = jobToEdit!.title
+            finishSwitch.isOn = jobToEdit!.isFinished
+            SaveButton.isEnabled = true
+        }
     }
     
     @IBAction func CancelTouched(_ sender: UIBarButtonItem) {
@@ -30,9 +42,13 @@ class JobViewController: UIViewController {
     }
     
     @IBAction func SaveTouched(_ sender: UIBarButtonItem) {
-        self.addJobDelegate?.addJob(job: JobToDo(title: titleInput.text!, isFinished: finishSwitch.isOn))
+        if jobToEdit != nil {
+            self.editJobDelegate?.editJob(job: JobToDo(title: titleInput.text!, isFinished: finishSwitch.isOn), jobIndex: jobToEditIndex!)
+        }
+        else {
+            self.addJobDelegate?.addJob(job: JobToDo(title: titleInput.text!, isFinished: finishSwitch.isOn))
+        }
         self.performSegue(withIdentifier: "backToT0Do", sender: nil)
-//        self.dismiss(animated: true, completion: nil)
     }
 
 }

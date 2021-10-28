@@ -7,7 +7,12 @@
 
 import UIKit
 
-class T0DoTableViewController: UITableViewController, AddJobDelegate {
+class T0DoTableViewController: UITableViewController, AddJobDelegate, EditJobDelegate {
+    func editJob(job: JobToDo, jobIndex: Int) {
+        self.jobs[jobIndex] = job
+        self.tableView.reloadData()
+    }
+    
     func addJob(job: JobToDo) {
         self.jobs.append(job)
         self.tableView.reloadData()
@@ -87,6 +92,14 @@ class T0DoTableViewController: UITableViewController, AddJobDelegate {
         if segue.identifier == "addJob" {
             let addJobViewController = segue.destination as! JobViewController
             addJobViewController.addJobDelegate = self
+        }
+        else if segue.identifier == "editJob" {
+            let editJobViewController = segue.destination as! JobViewController
+            let cell = sender as! T0DoTableViewCell
+            let job = JobToDo(title: cell.job.text!, isFinished: cell.status.text! == "✅" ? true : false)
+            editJobViewController.jobToEdit = job
+            editJobViewController.jobToEditIndex = tableView.indexPath(for: cell)?.row
+            editJobViewController.editJobDelegate = self
         }
     }
     

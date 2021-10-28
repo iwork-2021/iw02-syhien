@@ -87,13 +87,13 @@ class T0DoTableViewController: UITableViewController, AddJobDelegate, EditJobDel
     }
     
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let finishAction = UIContextualAction(style: .normal, title: "finish") { (action, view, completionHandler) in
+        let finishAction = UIContextualAction(style: .normal, title: "✅") { (action, view, completionHandler) in
             self.jobs[indexPath.row].isFinished = true
             completionHandler(true)
             self.tableView.reloadData()
         }
         finishAction.backgroundColor = .green
-        let unfinishAction = UIContextualAction(style: .normal, title: "unfinish") { (action, view, completionHandler) in
+        let unfinishAction = UIContextualAction(style: .normal, title: "🥱") { (action, view, completionHandler) in
             self.jobs[indexPath.row].isFinished = false
             completionHandler(true)
             self.tableView.reloadData()

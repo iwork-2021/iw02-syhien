@@ -16,6 +16,26 @@ iOS代办事项App开发
 
 ## 技术细节
 
+### 视图布局
+
+#### TableView 展示待办事项
+
+```
+TableView
+	TableCell
+		label // 事项内容
+		label // 完成情况
+```
+
+#### View 事项编辑
+
+```
+View
+	
+```
+
+
+
 ### 事项的存储
 
 定义了类`JobToDo`包含两个成员：

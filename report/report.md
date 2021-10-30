@@ -25,16 +25,31 @@ TableView
 	TableCell
 		label // 事项内容
 		label // 完成情况
+	Navigation Bar
+		left bar button // 排序
+		right bar button // 新增
 ```
+
+<img src="pics/1.png" alt="1" style="zoom:50%;" />
+
+
 
 #### View 事项编辑
 
 ```
 View
-	
+	Navigation Bar
+		left bar button // 取消
+		right bar button // 保存
+	titleStack
+		label // 引导文字
+		textField // 事项内容
+	finishStack
+		label // 引导文字
+		switch // 完成情况
 ```
 
-
+<img src="pics/2.png" alt="2" style="zoom:50%;" />
 
 ### 事项的存储
 
@@ -74,6 +89,8 @@ View
 
 #### 左滑以删除
 
+![3](pics/3.png)
+
 覆盖`editingStyle`即自动允许左滑，在左滑中实现对`jobs`的内容的修改并即时更新TableView
 
 ```
@@ -85,6 +102,8 @@ View
 ```
 
 #### 右滑标为完成或未完成
+
+![4](pics/4.png)
 
 覆盖`leadingSwipeActionsConfigurationForRowAt`即自动允许右滑，方法返回一个`UISwipeActionsConfiguration`其实就是一个actions的数组
 
@@ -114,13 +133,87 @@ ViewController中没有刻意禁止右滑到底，右滑到底将触发第1个ac
 
 ### 视图
 
+主要有两个视图：事项浏览、事项编辑
+
+![7](pics/7.png)
+
+#### 视图转换
+
+##### 从`TableView`到`JobView`有两种方式：
+
+1. 点击加号
+
+![8](pics/8.png)
+
+给这个segue action命名为`addJob`,`JobView`将会根据收到的不同identifier的segue做出不同的响应。
+
+此处响应为添加0个或1个新事项到`jobs`中
+
+2. 点击任一事项
+
+![9](pics/9.png)
+
+同样地，将这个action命名为`editJob`
+
+`JobView`会取得该事项（以一个`JobToDo`类的形式），对其进行修改。返回TableView时会自动刷新视图，不需要手动刷新
+
+##### 从`JobView`到`TableView`仅一种方式：
+
+`TableView`:
+
+```swift
+    @IBAction func unwindToT0Do(segue: UIStoryboardSegue) {
+        print("Back to T0Do")
+    }
+```
+
+`JobView`:
+
+```swift
+    @IBAction func CancelTouched(_ sender: UIBarButtonItem) {
+        self.performSegue(withIdentifier: "backToT0Do", sender: nil)
+    }
+    
+    @IBAction func SaveTouched(_ sender: UIBarButtonItem) {
+        if jobToEdit != nil {
+            self.editJobDelegate?.editJob(job: JobToDo(title: titleInput.text!, isFinished: finishSwitch.isOn), jobIndex: jobToEditIndex!)
+        }
+        else {
+            self.addJobDelegate?.addJob(job: JobToDo(title: titleInput.text!, isFinished: finishSwitch.isOn))
+        }
+        self.performSegue(withIdentifier: "backToT0Do", sender: nil)
+    }
+
+}
+```
+
+用一个`performSegue`的方法返回视图
+
+#### 视图间沟通
+
+两个视图（或者说两个类）之间需要在某些时候共享一些内容，此处通过协议`protocol`实现
+
+在`T0DoTableViewController`中实现好了`editJob` `addJob` 两方法
+
+在`JobViewController`中使用两协议来调用两方法：
+
+```swift
+protocol AddJobDelegate {
+    func addJob(job: JobToDo)
+}
+
+protocol EditJobDelegate {
+    func editJob(job: JobToDo, jobIndex: Int)
+}
+```
+
 
 
 ### 背景色强调
 
 通过给已完成的任务设定浅灰色（系统6号灰色），在视觉上强调未完成的任务
 
-这里放图
+![5](pics/5.png)
 
 通过在返回`UITableViewCell`时对已完成的任务进行定制实现：
 
@@ -138,6 +231,8 @@ ViewController中没有刻意禁止右滑到底，右滑到底将触发第1个ac
 ### 事项排序
 
 TableView的左上角的`Refresh`将事项按照完成情况进行**不稳定**的排序（因为在该App中，事项没有截止时间这一概念）。
+
+![6](pics/6.png)
 
 在button被按下后，对`jobs`进行排序并刷新显示：
 

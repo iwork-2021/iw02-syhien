@@ -112,5 +112,41 @@ ViewController中没有刻意禁止右滑到底，右滑到底将触发第1个ac
     }
 ```
 
-### 视图切换与视图协作
+### 视图
+
+
+
+### 背景色强调
+
+通过给已完成的任务设定浅灰色（系统6号灰色），在视觉上强调未完成的任务
+
+这里放图
+
+通过在返回`UITableViewCell`时对已完成的任务进行定制实现：
+
+```swift
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "T0DoCell", for: indexPath) as! T0DoTableViewCell
+        let job = jobs[indexPath.row]
+        cell.status.text! = job.isFinished ? "✅" : "🥱"
+        cell.job.text! = job.title
+        cell.backgroundColor = job.isFinished ? .systemGray6 : .none
+        return cell
+    }
+```
+
+### 事项排序
+
+TableView的左上角的`Refresh`将事项按照完成情况进行**不稳定**的排序（因为在该App中，事项没有截止时间这一概念）。
+
+在button被按下后，对`jobs`进行排序并刷新显示：
+
+```swift
+    @IBAction func refreshTouched(_ sender: Any) {
+        jobs.sort { (joba, jobb) -> Bool in
+            return joba.isFinished == false
+        }
+        self.tableView.reloadData()
+    }
+```
 
